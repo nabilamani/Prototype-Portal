@@ -1,0 +1,56 @@
+body {
+  font-family: "Montserrat", sans-serif;
+}
+.gradient-button {
+  background: linear-gradient(135deg, #457fb6 0%, #59aeff 100%);
+}
+.gradient-button:hover {
+  box-shadow: 0 8px 20px rgba(69, 127, 182, 0.3);
+}
+.gradient-button:active {
+  opacity: 0.95;
+}
+
+.airnav-blue {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+}
+
+.input-focus {
+  transition: all 0.3s ease;
+}
+
+.input-focus:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.btn-login {
+  background: linear-gradient(135deg, #457fb6 0%, #59aeff 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+  box-shadow: 0 8px 20px rgba(69, 127, 182, 0.3);
+}
+
+.logo-shadow {
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+}
+
+.card-shadow {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.captcha-box {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  border: 2px solid #e2e8f0;
+}
+
+.link-hover:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+input::placeholder {
+            font-size: 0.75rem;
+        }
