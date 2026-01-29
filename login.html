@@ -1,162 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AirNav Application Portal - Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Custom styles for exact matching */
-        .airnav-blue {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-        }
-        .input-focus {
-            transition: all 0.3s ease;
-        }
-        .input-focus:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-        .btn-login {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            transition: all 0.3s ease;
-        }
-        .btn-login:hover {
-            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-        }
-        .logo-shadow {
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
-        }
-        body {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            min-height: 100vh;
-        }
-        .card-shadow {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        .captcha-box {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            border: 2px solid #e2e8f0;
-        }
-        .link-hover:hover {
-            color: #1d4ed8;
-            text-decoration: underline;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="w-full max-w-md">
+
+<body class="flex items-center justify-center min-h-screen p-4" style="background-color: #F5FAFF;">
+    <div class="bg-white rounded-2xl shadow-lg p-10 max-w-md w-full">
         <!-- Login Card -->
-        <div class="bg-white rounded-2xl shadow-2xl card-shadow p-8">
-            <!-- Logo Section -->
-            <!-- <div class="flex justify-center mb-8">
-                <div class="airnav-blue w-20 h-20 rounded-full flex items-center justify-center logo-shadow">
-                    <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
-                        <path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/>
-                    </svg>
-                </div>
-            </div> -->
+        <!-- Logo Section -->
+        <div class="flex justify-center mb-5">
+            <img src="asset/airnav-logo.png" alt="AirNav Logo" class="w-16 h-16 object-contain">
+        </div>
 
-            <!-- Title Section -->
-            <div class="text-center mb-8">
-                <h1 class="text-2xl font-bold text-gray-800 mb-2">AirNav Application Portal</h1>
-                <p class="text-gray-600 text-sm">Sign in to access AirNav internal applications</p>
-            </div>
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h1 class="text-lg font-semibold text-gray-900">AirNav Application Portal</h1>
+            <p class="text-xs text-gray-600">Sign in to access AirNav internal applications</p>
+        </div>
 
-            <!-- Form Section -->
-            <form id="loginForm" class="space-y-5">
-                <!-- Username Input -->
-                <div>
-                    <!-- <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+        <!-- Form Section -->
+        <form id="loginForm" class="space-y-4">
+            <!-- Username Input -->
+            <div>
+                <!-- <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
                         Username
                     </label> -->
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-user text-gray-400"></i>
-                        </div>
-                        <input 
-                            type="text" 
-                            id="username" 
-                            name="username"
-                            class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg input-focus outline-none text-gray-700 placeholder-gray-400"
-                            placeholder="Enter your username"
-                            required
-                        >
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-user text-gray-400"></i>
                     </div>
+                    <input type="text" id="username" name="username"
+                        class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg input-focus outline-none text-gray-700 placeholder-gray-400"
+                        placeholder="Enter your username" required>
                 </div>
+            </div>
 
-                <!-- Password Input -->
-                <div>
-                    <!-- <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+            <!-- Password Input -->
+            <div>
+                <!-- <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
                         Password
                     </label> -->
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-lock text-gray-400"></i>
-                        </div>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password"
-                            class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg input-focus outline-none text-gray-700 placeholder-gray-400"
-                            placeholder="Enter your password"
-                            required
-                        >
-                        <button 
-                            type="button" 
-                            id="togglePassword"
-                            class="absolute inset-y-0 right-0 pr-3 flex items-center"
-                        >
-                            <i id="eyeIcon" class="fas fa-eye text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"></i>
-                        </button>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-lock text-gray-400"></i>
                     </div>
+                    <input type="password" id="password" name="password"
+                        class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg input-focus outline-none text-gray-700 placeholder-gray-400"
+                        placeholder="Enter your password" required>
+                    <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                        <i id="eyeIcon"
+                            class="fas fa-eye text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"></i>
+                    </button>
                 </div>
+            </div>
 
-                <!-- Captcha Section -->
-                <div>
-                    <div class="flex items-center space-x-3">
-                        <input 
-                        type="text" 
-                        id="captchaInput" 
-                        name="captcha"
-                        class="w-full mt-3 px-3 py-3 border border-gray-300 rounded-lg input-focus outline-none text-gray-700 placeholder-gray-400"
-                        placeholder="Enter captcha code"
-                        required
-                    >
-                        <div class="captcha-box rounded-lg px-4 py-3 flex-1">
-                            <span id="captchaText" class="text-lg font-mono font-bold text-gray-700 tracking-wider">3Y28H76</span>
-                        </div>
-                        <button 
-                            type="button" 
-                            id="refreshCaptcha"
-                            class="p-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors group"
-                            title="Refresh Captcha"
-                        >
-                            <i class="fas fa-sync-alt text-gray-600 group-hover:text-gray-800 transition-colors"></i>
-                        </button>
+            <!-- Captcha Section -->
+            <div class="mt-3">
+                <div class="flex items-stretch gap-3 w-full">
+
+                    <!-- Input Captcha -->
+                    <input type="text" id="captchaInput" name="captcha" class="w-[65%] h-12 px-3 
+                   border border-gray-300 rounded-lg 
+                   outline-none text-gray-700 placeholder-gray-400" placeholder="Enter captcha code" required>
+
+                    <!-- Captcha Box -->
+                    <div class="w-[25%] h-12 px-2 
+                    flex items-center justify-center 
+                    border border-gray-300 rounded-lg bg-gray-100">
+                        <span id="captchaText" class="text-lg font-mono font-bold text-gray-700 tracking-wider">
+                            3Y28H76
+                        </span>
                     </div>
-                </div>
 
-                <!-- Forgot Password Link -->
-                <div class="text-right">
-                    <a href="#" class="text-sm text-blue-600 link-hover transition-colors">
-                        Forgot Password?
-                    </a>
-                </div>
+                    <!-- Refresh Button -->
+                    <button type="button" id="refreshCaptcha" class="w-12 h-12 flex items-center justify-center 
+                   bg-gray-100 hover:bg-gray-200 
+                   rounded-lg transition" title="Refresh Captcha">
+                        <i class="fas fa-sync-alt text-gray-600 text-lg leading-none"></i>
+                    </button>
 
-                <!-- Login Button -->
-                <button 
-                    type="submit" 
-                    class="w-full btn-login text-white font-semibold py-3 px-4 rounded-lg"
-                >
-                    Login
-                </button>
-            </form>
-        </div>
+                </div>
+            </div>
+
+
+
+            <!-- Forgot Password Link -->
+            <div class="text-right">
+                <a href="#" class="text-sm link-hover transition-colors">
+                    Forgot Password?
+                </a>
+            </div>
+
+            <!-- Login Button -->
+            <button type="submit" class="w-full btn-login text-white font-semibold py-3 px-4 rounded-lg">
+                Login
+            </button>
+        </form>
     </div>
 
     <!-- Success/Error Messages (Hidden by default) -->
@@ -175,10 +121,10 @@
         const passwordInput = document.getElementById('password');
         const eyeIcon = document.getElementById('eyeIcon');
 
-        togglePassword.addEventListener('click', function() {
+        togglePassword.addEventListener('click', function () {
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
-            
+
             // Toggle eye icon
             if (type === 'password') {
                 eyeIcon.classList.remove('fa-eye-slash');
@@ -204,17 +150,17 @@
         const captchaText = document.getElementById('captchaText');
         const refreshIcon = refreshCaptcha.querySelector('i');
 
-        refreshCaptcha.addEventListener('click', function() {
+        refreshCaptcha.addEventListener('click', function () {
             // Add rotation animation
             refreshIcon.style.animation = 'spin 0.5s linear';
-            
+
             // Generate new captcha
             const newCaptcha = generateCaptcha();
             captchaText.textContent = newCaptcha;
-            
+
             // Clear captcha input
             document.getElementById('captchaInput').value = '';
-            
+
             // Remove animation after completion
             setTimeout(() => {
                 refreshIcon.style.animation = '';
@@ -236,9 +182,9 @@
             const messageBox = document.getElementById('messageBox');
             const messageText = document.getElementById('messageText');
             const messageIcon = document.getElementById('messageIcon');
-            
+
             messageText.textContent = message;
-            
+
             if (type === 'success') {
                 messageIcon.innerHTML = '<i class="fas fa-check-circle text-green-500 text-xl"></i>';
             } else if (type === 'error') {
@@ -246,10 +192,10 @@
             } else if (type === 'info') {
                 messageIcon.innerHTML = '<i class="fas fa-info-circle text-blue-500 text-xl"></i>';
             }
-            
+
             messageBox.classList.remove('hidden');
             messageBox.style.animation = 'slideIn 0.3s ease-out';
-            
+
             // Auto hide after 3 seconds
             setTimeout(() => {
                 messageBox.style.animation = 'slideOut 0.3s ease-out';
@@ -274,38 +220,37 @@
         document.head.appendChild(animStyle);
 
         // Handle form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const captchaInput = document.getElementById('captchaInput').value;
             const currentCaptcha = document.getElementById('captchaText').textContent;
-            
+
             // Simple validation
             if (!username || !password) {
                 showMessage('Please fill in all fields', 'error');
                 return;
             }
-            
+
             if (captchaInput.toUpperCase() !== currentCaptcha) {
                 showMessage('Invalid captcha. Please try again.', 'error');
                 // Refresh captcha on error
                 refreshCaptcha.click();
                 return;
             }
-            
+
             // Simulate login process
             showMessage('Logging in...', 'info');
-            
+
             setTimeout(() => {
                 // Simulate successful login
                 showMessage('Login successful! Redirecting...', 'success');
-                
-                // Redirect to dashboard (replace with actual URL)
+
+                // Redirect to setup-authenticator page
                 setTimeout(() => {
-                    // window.location.href = '/dashboard';
-                    console.log('Redirecting to dashboard...');
+                    window.location.href = 'setup-authenticator.html';
                 }, 1500);
             }, 1000);
         });
@@ -313,24 +258,25 @@
         // Add input animations
         const inputs = document.querySelectorAll('input');
         inputs.forEach(input => {
-            input.addEventListener('focus', function() {
+            input.addEventListener('focus', function () {
                 this.parentElement.classList.add('scale-[1.02]');
             });
-            
-            input.addEventListener('blur', function() {
+
+            input.addEventListener('blur', function () {
                 this.parentElement.classList.remove('scale-[1.02]');
             });
         });
 
         // Add hover effect to card
         const card = document.querySelector('.bg-white');
-        card.addEventListener('mouseenter', function() {
+        card.addEventListener('mouseenter', function () {
             this.style.transform = 'translateY(-2px)';
         });
-        
-        card.addEventListener('mouseleave', function() {
+
+        card.addEventListener('mouseleave', function () {
             this.style.transform = 'translateY(0)';
         });
     </script>
 </body>
+
 </html>
