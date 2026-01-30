@@ -10,11 +10,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script>
-        // Apply dark mode immediately before page renders to avoid flash
+        // Unified theme bootstrap: apply before paint to html and body to avoid FOUC
         (function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            if (savedTheme === 'dark') {
-                document.documentElement.classList.add('dark-mode-html');
+            const theme = (localStorage.getItem('theme') || 'light');
+            const html = document.documentElement;
+            const body = document.body;
+            if (theme === 'dark') {
+                html.classList.add('dark-mode-html');
+                body && body.classList.add('dark-mode');
+            } else {
+                html.classList.remove('dark-mode-html');
+                body && body.classList.remove('dark-mode');
             }
         })();
     </script>
@@ -138,37 +144,29 @@
 
     <script>
         // Dark mode initialization
-        function initializeDarkMode() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            const isDarkMode = savedTheme === 'dark';
-            
-            // Add dark-mode class to body
-            if (isDarkMode) {
-                document.body.classList.add('dark-mode');
+        function applyThemeFromStorage() {
+            const theme = (localStorage.getItem('theme') || 'light');
+            const html = document.documentElement;
+            const body = document.body;
+            const toggle = document.getElementById('themeToggle');
+            if (theme === 'dark') {
+                html.classList.add('dark-mode-html');
+                body.classList.add('dark-mode');
+                toggle && toggle.classList.add('dark-mode');
             } else {
-                document.body.classList.remove('dark-mode');
+                html.classList.remove('dark-mode-html');
+                body.classList.remove('dark-mode');
+                toggle && toggle.classList.remove('dark-mode');
             }
-            
-            // Update theme toggle button
-            const themeToggle = document.getElementById('themeToggle');
-            if (themeToggle) {
-                if (isDarkMode) {
-                    themeToggle.classList.add('dark-mode');
-                } else {
-                    themeToggle.classList.remove('dark-mode');
-                }
-            }
+        }
+        function initializeDarkMode() {
+            applyThemeFromStorage();
         }
 
         function toggleDarkMode() {
-            const body = document.body;
-            const themeToggle = document.getElementById('themeToggle');
-            
-            body.classList.toggle('dark-mode');
-            themeToggle.classList.toggle('dark-mode');
-            
-            const isDarkMode = body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            const isDark = !document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            applyThemeFromStorage();
         }
 
         function setLanguage(lang) {
@@ -181,6 +179,7 @@
         // Initialize dark mode immediately and on DOMContentLoaded
         initializeDarkMode();
         window.addEventListener('DOMContentLoaded', initializeDarkMode);
+        window.addEventListener('storage', function(e) { if (e.key === 'theme') applyThemeFromStorage(); });
 
         // Toggle password visibility
         const togglePassword = document.getElementById('togglePassword');

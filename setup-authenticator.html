@@ -8,11 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script>
-        // Apply dark mode immediately before page renders to avoid flash
+        // Unified theme bootstrap: apply before paint to html and body to avoid FOUC
         (function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            if (savedTheme === 'dark') {
-                document.documentElement.classList.add('dark-mode-html');
+            const theme = (localStorage.getItem('theme') || 'light');
+            const html = document.documentElement;
+            const body = document.body;
+            if (theme === 'dark') {
+                html.classList.add('dark-mode-html');
+                body && body.classList.add('dark-mode');
+            } else {
+                html.classList.remove('dark-mode-html');
+                body && body.classList.remove('dark-mode');
             }
         })();
     </script>
@@ -79,40 +85,7 @@
     </div>
 
     <script>
-        // Dark mode initialization
-        function initializeDarkMode() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            const isDarkMode = savedTheme === 'dark';
-            
-            // Add dark-mode class to body
-            if (isDarkMode) {
-                document.body.classList.add('dark-mode');
-            } else {
-                document.body.classList.remove('dark-mode');
-            }
-            
-            // Update theme toggle button
-            const themeToggle = document.getElementById('themeToggle');
-            if (themeToggle) {
-                if (isDarkMode) {
-                    themeToggle.classList.add('dark-mode');
-                } else {
-                    themeToggle.classList.remove('dark-mode');
-                }
-            }
-        }
-
-        function toggleDarkMode() {
-            const body = document.body;
-            const themeToggle = document.getElementById('themeToggle');
-            
-            body.classList.toggle('dark-mode');
-            themeToggle.classList.toggle('dark-mode');
-            
-            const isDarkMode = body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-        }
-
+        // Set language active state
         function setLanguage(lang) {
             document.querySelectorAll('.language-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -120,61 +93,56 @@
             event.target.classList.add('active');
         }
 
-        // Initialize dark mode immediately and on DOMContentLoaded
-        initializeDarkMode();
-        window.addEventListener('DOMContentLoaded', initializeDarkMode);
-
         function copyToClipboard() {
             const secretInput = document.getElementById('secretKey');
             const text = secretInput.value;
             const btn = event.target.closest('button');
-            
             if (!btn) return;
-            
-            // Copy ke clipboard
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text).then(() => {
-                    // Tampilkan feedback success
                     const originalHTML = btn.innerHTML;
                     btn.classList.add('copy-success');
                     btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>';
-                    
-                    // Kembali ke state awal setelah 2 detik
-                    setTimeout(() => {
-                        btn.classList.remove('copy-success');
-                        btn.innerHTML = originalHTML;
-                    }, 2000);
-                }).catch(err => {
-                    console.error('Failed to copy:', err);
-                    alert('Failed to copy to clipboard');
-                });
+                    setTimeout(() => { btn.classList.remove('copy-success'); btn.innerHTML = originalHTML; }, 2000);
+                }).catch(err => { console.error('Failed to copy:', err); alert('Failed to copy to clipboard'); });
             } else {
-                // Fallback untuk browser lama
                 const textarea = document.createElement('textarea');
-                textarea.value = text;
-                document.body.appendChild(textarea);
-                textarea.select();
+                textarea.value = text; document.body.appendChild(textarea); textarea.select();
                 try {
                     document.execCommand('copy');
-                    const originalHTML = btn.innerHTML;
-                    btn.classList.add('copy-success');
+                    const originalHTML = btn.innerHTML; btn.classList.add('copy-success');
                     btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>';
-                    
-                    setTimeout(() => {
-                        btn.classList.remove('copy-success');
-                        btn.innerHTML = originalHTML;
-                    }, 2000);
-                } catch (err) {
-                    console.error('Fallback copy failed:', err);
-                    alert('Failed to copy to clipboard');
-                }
+                    setTimeout(() => { btn.classList.remove('copy-success'); btn.innerHTML = originalHTML; }, 2000);
+                } catch (err) { console.error('Fallback copy failed:', err); alert('Failed to copy to clipboard'); }
                 document.body.removeChild(textarea);
             }
         }
 
-        function continueToOTP() {
-            window.location.href = 'verify.html';
+        function continueToOTP() { window.location.href = 'verify.html'; }
+
+        // THEME: shared utilities
+        function applyThemeFromStorage() {
+            const theme = (localStorage.getItem('theme') || 'light');
+            const html = document.documentElement;
+            const body = document.body;
+            const toggle = document.getElementById('themeToggle');
+            if (theme === 'dark') {
+                html.classList.add('dark-mode-html');
+                body.classList.add('dark-mode');
+                toggle && toggle.classList.add('dark-mode');
+            } else {
+                html.classList.remove('dark-mode-html');
+                body.classList.remove('dark-mode');
+                toggle && toggle.classList.remove('dark-mode');
+            }
         }
+        function toggleDarkMode() {
+            const isDark = !document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            applyThemeFromStorage();
+        }
+        window.addEventListener('DOMContentLoaded', applyThemeFromStorage);
+        window.addEventListener('storage', function(e) { if (e.key === 'theme') applyThemeFromStorage(); });
     </script>
 </body>
 </html>
