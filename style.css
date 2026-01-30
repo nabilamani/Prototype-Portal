@@ -180,7 +180,7 @@ body.dark-mode .language-btn.active {
 
 /* Theme Toggle */
 .theme-toggle {
-  width: 50px;
+  width: 60px;
   height: 34px;
   background-color: #ddd;
   border: 1.5px solid #999;
@@ -241,7 +241,7 @@ body.dark-mode .language-btn.active {
    ======================================== */
 
 body.dark-mode .bg-white {
-  background-color: #1a1a1a;
+  background-color: rgba(255, 255, 255, 0.10);
   color: #ffffff;
 }
 
@@ -266,21 +266,21 @@ body.dark-mode .text-gray-400 {
 }
 
 body.dark-mode .border-gray-300 {
-  border-color: #444;
+  border-color: rgba(255, 255, 255, 0.10);
 }
 
 body.dark-mode .border-gray-200 {
-  border-color: #333;
+  border-color: rgba(255, 255, 255, 0.10);
 }
 
 body.dark-mode .bg-gray-100,
 body.dark-mode .bg-gray-50 {
-  background-color: #2a2a2a;
+  background-color: rgba(255, 255, 255, 0.10);
 }
 
 body.dark-mode input,
 body.dark-mode input::placeholder {
-  background-color: #2a2a2a;
+  background-color: transparent;
   color: #ffffff;
   border-color: #444;
 }
