@@ -67,7 +67,7 @@
             event.target.classList.add('active');
         }
 
-        // THEME: shared utilities for consistent behavior across pages
+        // THEME: shared utilities for consistent behavior across pages (match login.html)
         function applyThemeFromStorage() {
             const theme = (localStorage.getItem('theme') || 'light');
             const html = document.documentElement;
@@ -83,12 +83,17 @@
                 toggle && toggle.classList.remove('dark-mode');
             }
         }
+        function initializeDarkMode() {
+            applyThemeFromStorage();
+        }
         function toggleDarkMode() {
             const isDark = !document.body.classList.contains('dark-mode');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             applyThemeFromStorage();
         }
-        window.addEventListener('DOMContentLoaded', applyThemeFromStorage);
+        // Initialize immediately and on DOMContentLoaded; also respond to cross-tab storage changes
+        initializeDarkMode();
+        window.addEventListener('DOMContentLoaded', initializeDarkMode);
         window.addEventListener('storage', function(e) { if (e.key === 'theme') applyThemeFromStorage(); });
 
         // Log animation timeline

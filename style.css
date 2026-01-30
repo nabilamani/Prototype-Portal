@@ -425,7 +425,7 @@ body.dark-mode .hero-subtitle {
 /* Blur gradient background */
 .gradient-blur-layer {
   position: fixed;
-  bottom: -230px;
+  bottom: -260px;
   left: 0;
   right: 0;
   height: 100%;
