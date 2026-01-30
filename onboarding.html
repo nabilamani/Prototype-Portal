@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirNav Application Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon"><img src="asset/airnav-logo.png" alt=""></div>
+            <div class="logo-text">Portal Aplikasi Airnav</div>
+        </div>
+        <div class="language-selector">
+            <button class="language-btn active" onclick="setLanguage('en')">EN</button>
+            <button class="language-btn" onclick="setLanguage('id')">ID</button>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleDarkMode()"></button>
+        </div>
+    </header>
+
+    <!-- Hero Content -->
+    <div class="hero-container">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                AirNav <span class="highlight">Application</span><br>
+                Portal
+            </h1>
+            <p class="hero-subtitle">
+                A centralized portal to securely, efficiently, and seamlessly access all<br>
+                internal applications and services of AirNav Indonesia.
+            </p>
+            <a href="login.html" class="hero-button">
+                Access Portal
+                <span class="arrow-icon">→</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Gradient Blur Layer -->
+    <div class="gradient-blur-layer"></div>
+
+    <script>
+        // Dark mode initialization
+        function initializeDarkMode() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const isDarkMode = savedTheme === 'dark';
+            
+            // Add dark-mode class to body
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+            
+            // Update theme toggle button
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                if (isDarkMode) {
+                    themeToggle.classList.add('dark-mode');
+                } else {
+                    themeToggle.classList.remove('dark-mode');
+                }
+            }
+        }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            
+            body.classList.toggle('dark-mode');
+            themeToggle.classList.toggle('dark-mode');
+            
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        }
+
+        function setLanguage(lang) {
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Initialize dark mode immediately and on DOMContentLoaded
+        initializeDarkMode();
+        window.addEventListener('DOMContentLoaded', initializeDarkMode);
+
+        // Log animation timeline
+        console.log('Page loaded - animations starting in sequence:');
+        console.log('0.5s: Logo and language selector slide in');
+        console.log('1.5s: Hero content fades in');
+        console.log('0s: Gradient blur layer slides up');
+    </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Apply dark mode immediately before page renders to avoid flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode-html');
+            }
+        })();
+    </script>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon"><img src="asset/airnav-logo.png" alt="AirNav"></div>
+            <div class="logo-text">Portal Aplikasi Airnav</div>
+        </div>
+        <div class="language-selector">
+            <button class="language-btn active" onclick="setLanguage('en')">EN</button>
+            <button class="language-btn" onclick="setLanguage('id')">ID</button>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleDarkMode()"></button>
+        </div>
+    </header>
+    <div class="bg-white rounded-2xl shadow-lg p-10 max-w-md w-full" style="margin-top: 80px;">
+        <!-- Header -->
+        <div class="text mb-6">
+            <h1 class="text-2xl font-semibold text-gray-900 mb-1">OTP Verification</h1>
+            <p class="text-sm text-gray-600">Protect your account with an authenticator app</p>
+        </div>
+
+        <!-- OTP Input Section -->
+        <div class="mb-6">
+            <input 
+                type="text" 
+                id="otpInput"
+                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg font-semibold text-lg text-gray-800 tracking-widest focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                placeholder="Please enter OTP code"
+                style="font-family: 'Montserrat', sans-serif;"
+                maxlength="6"
+                inputmode="numeric"
+            >
+        </div>
+
+        <!-- Verify Button -->
+        <button 
+            onclick="verifyOTP()"
+            class="w-full gradient-button text-white font-medium py-3 px-4 rounded-lg transition-all shadow-md"
+        >
+            Verify
+        </button>
+    </div>
+
+    <script>
+        // Dark mode initialization
+        function initializeDarkMode() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const isDarkMode = savedTheme === 'dark';
+            
+            // Add dark-mode class to body
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+            
+            // Update theme toggle button
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                if (isDarkMode) {
+                    themeToggle.classList.add('dark-mode');
+                } else {
+                    themeToggle.classList.remove('dark-mode');
+                }
+            }
+        }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            
+            body.classList.toggle('dark-mode');
+            themeToggle.classList.toggle('dark-mode');
+            
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        }
+
+        function setLanguage(lang) {
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Initialize dark mode immediately and on DOMContentLoaded
+        initializeDarkMode();
+        window.addEventListener('DOMContentLoaded', initializeDarkMode);
+
+        // Allow only numbers in OTP input
+        document.getElementById('otpInput').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Allow Enter key to trigger verification
+        document.getElementById('otpInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifyOTP();
+            }
+        });
+
+        function verifyOTP() {
+            const otpInput = document.getElementById('otpInput');
+            const otp = otpInput.value.trim();
+
+            if (otp.length !== 6) {
+                alert('Please enter a valid 6-digit OTP code');
+                otpInput.focus();
+                return;
+            }
+
+            // Here you can add your verification logic
+            console.log('OTP entered:', otp);
+            
+            // Example: Send to server for verification
+            // fetch('/api/verify-otp', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({ otp: otp })
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     if (data.success) {
+            //         window.location.href = 'success.html';
+            //     } else {
+            //         alert('Invalid OTP code');
+            //     }
+            // });
+
+            alert('OTP verified successfully: ' + otp);
+        }
+    </script>
+</body>
+</html>

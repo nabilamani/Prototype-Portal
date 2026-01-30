@@ -9,9 +9,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script>
+        // Apply dark mode immediately before page renders to avoid flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode-html');
+            }
+        })();
+    </script>
 </head>
 
-<body class="flex items-center justify-center min-h-screen p-4" style="background-color: #F5FAFF;">
+<body class="flex items-center justify-center min-h-screen p-4">
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon"><img src="asset/airnav-logo.png" alt="AirNav"></div>
+            <div class="logo-text">Portal Aplikasi Airnav</div>
+        </div>
+        <div class="language-selector">
+            <button class="language-btn active" onclick="setLanguage('en')">EN</button>
+            <button class="language-btn" onclick="setLanguage('id')">ID</button>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleDarkMode()"></button>
+        </div>
+    </header>
     <div class="bg-white rounded-2xl shadow-lg p-10 max-w-md w-full">
         <!-- Login Card -->
         <!-- Logo Section -->
@@ -116,6 +137,51 @@
     </div>
 
     <script>
+        // Dark mode initialization
+        function initializeDarkMode() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const isDarkMode = savedTheme === 'dark';
+            
+            // Add dark-mode class to body
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+            
+            // Update theme toggle button
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                if (isDarkMode) {
+                    themeToggle.classList.add('dark-mode');
+                } else {
+                    themeToggle.classList.remove('dark-mode');
+                }
+            }
+        }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            
+            body.classList.toggle('dark-mode');
+            themeToggle.classList.toggle('dark-mode');
+            
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        }
+
+        function setLanguage(lang) {
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Initialize dark mode immediately and on DOMContentLoaded
+        initializeDarkMode();
+        window.addEventListener('DOMContentLoaded', initializeDarkMode);
+
         // Toggle password visibility
         const togglePassword = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
