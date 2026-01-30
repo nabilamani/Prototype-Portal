@@ -101,7 +101,6 @@ header {
   align-items: center;
   gap: 12px;
   opacity: 1;
-  animation: slideInLeft 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
 }
 
 .logo-icon {
@@ -144,7 +143,6 @@ body.dark-mode .logo-text {
   gap: 12px;
   align-items: center;
   opacity: 1;
-  animation: slideInRight 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
 }
 
 .language-btn {
@@ -303,6 +301,15 @@ body.dark-mode {
   background-color: #051321;
 }
 
+/* Onboarding Header Animations */
+.gradient-blur-layer ~ header .logo-container {
+  animation: slideInLeft 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+}
+
+.gradient-blur-layer ~ header .language-selector {
+  animation: slideInRight 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+}
+
 /* Hero Container */
 .hero-container {
   display: flex;
@@ -446,6 +453,24 @@ body.dark-mode .hero-subtitle {
 /* ========================================
    RESPONSIVE DESIGN
    ======================================== */
+
+/* Message Box / Alert */
+#messageBox {
+  transition: all 0.3s ease;
+}
+
+#messageBox .bg-white {
+  background-color: white;
+}
+
+body.dark-mode #messageBox .bg-white {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+body.dark-mode #messageBox p {
+  color: #ffffff;
+}
 
 @media (max-width: 768px) {
   header {
