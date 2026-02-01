@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="js/theme-bootstrap.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     </head>
 <body>
     <!-- Header -->
@@ -19,7 +20,9 @@
         <div class="language-selector">
             <button class="language-btn active" onclick="setLanguage('en')">EN</button>
             <button class="language-btn" onclick="setLanguage('id')">ID</button>
-            <button class="theme-toggle" id="themeToggle" onclick="toggleDarkMode()"></button>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleDarkMode()">
+                <span id="themeIcon"></span>
+            </button>
         </div>
     </header>
 
